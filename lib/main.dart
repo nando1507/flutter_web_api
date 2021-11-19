@@ -2,10 +2,12 @@ import 'package:flutter_web_api/screens/dashboard.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(BytebankApp());
+  runApp(const BytebankApp());
 }
 
 class BytebankApp extends StatelessWidget {
+  const BytebankApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,7 +20,7 @@ class BytebankApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch()
             .copyWith(secondary: Colors.blueAccent[700]),
       ),
-      home: Dashboard(),
+      home: const Dashboard(),
     );
   }
 }

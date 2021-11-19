@@ -25,7 +25,7 @@ class _ContactsListState extends State<ContactsList> {
         title: const Text(_appTitle),
       ),
       body: FutureBuilder<List<Contact>>(
-        initialData: [],
+        initialData: const [],
         future: _dao.findAll(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
@@ -42,7 +42,6 @@ class _ContactsListState extends State<ContactsList> {
                   ],
                 ),
               );
-              break;
             case ConnectionState.active:
               break;
             case ConnectionState.done:
@@ -54,7 +53,6 @@ class _ContactsListState extends State<ContactsList> {
                 },
                 itemCount: contacts.length,
               );
-              break;
           }
           return const Text(_erroDesconhecido);
         },
@@ -63,7 +61,7 @@ class _ContactsListState extends State<ContactsList> {
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => ContactForm(),
+              builder: (context) => const ContactForm(),
             ),
           ).then((value) => setState(() {}));
         },
