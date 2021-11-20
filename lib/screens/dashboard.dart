@@ -1,4 +1,5 @@
 import 'package:flutter_web_api/screens/contacts_list.dart';
+import 'package:flutter_web_api/screens/transactions_list.dart';
 import 'package:flutter/material.dart';
 
 
@@ -25,13 +26,8 @@ class Dashboard extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: <Widget>[
-                _FeatureItem('Transfer', Icons.monetization_on, onClick: () {
-                  _showContactsList(context);
-                },),
-                _FeatureItem('Transaction Feed', Icons.description, onClick: () {
-                  debugPrint('Clicked');
-                },
-
+                _FeatureItem('Transfer', Icons.monetization_on, onClick: () => _showContactsList(context),),
+                _FeatureItem('Transaction Feed', Icons.description, onClick: () => _showTransactionsList(context),
                 ),
               ],
             ),
@@ -95,6 +91,14 @@ void _showContactsList(BuildContext context) {
   Navigator.of(context).push(
     MaterialPageRoute(
       builder: (context) => const ContactsList(),
+    ),
+  );
+}
+
+void _showTransactionsList(BuildContext context){
+  Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: (context) => TransactionsList(),
     ),
   );
 }
