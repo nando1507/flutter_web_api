@@ -1,3 +1,4 @@
+import 'package:flutter_web_api/components/progress.dart';
 import 'package:flutter_web_api/database/dao/contact_dao.dart';
 import 'package:flutter_web_api/models/contact.dart';
 import 'package:flutter_web_api/screens/contact_form.dart';
@@ -5,7 +6,7 @@ import 'package:flutter/material.dart';
 
 
 const String _appTitle = 'Transfer';
-const String _carregando = 'Loading';
+
 const String _erroDesconhecido = 'Unknown error';
 
 class ContactsList extends StatefulWidget {
@@ -32,16 +33,7 @@ class _ContactsListState extends State<ContactsList> {
             case ConnectionState.none:
               break;
             case ConnectionState.waiting:
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const <Widget>[
-                    CircularProgressIndicator(),
-                    Text(_carregando)
-                  ],
-                ),
-              );
+              return Progress();
             case ConnectionState.active:
               break;
             case ConnectionState.done:
@@ -75,9 +67,7 @@ class _ContactsListState extends State<ContactsList> {
 
 class _ContactItem extends StatelessWidget {
   final Contact contact;
-
   const _ContactItem(this.contact);
-
   @override
   Widget build(BuildContext context) {
     return Card(
