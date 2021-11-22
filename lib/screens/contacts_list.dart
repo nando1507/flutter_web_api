@@ -3,7 +3,7 @@ import 'package:flutter_web_api/database/dao/contact_dao.dart';
 import 'package:flutter_web_api/models/contact.dart';
 import 'package:flutter_web_api/screens/contact_form.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_web_api/screens/transaction_form.dart';
 
 const String _appTitle = 'Transfer';
 
@@ -33,7 +33,7 @@ class _ContactsListState extends State<ContactsList> {
             case ConnectionState.none:
               break;
             case ConnectionState.waiting:
-              return Progress();
+              return const Progress();
             case ConnectionState.active:
               break;
             case ConnectionState.done:
@@ -41,7 +41,16 @@ class _ContactsListState extends State<ContactsList> {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final Contact contact = contacts[index];
-                  return _ContactItem(contact);
+                  return _ContactItem(
+                    contact,
+                    onClick: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => TransactionForm(contact),
+                        ),
+                      );
+                    },
+                  );
                 },
                 itemCount: contacts.length,
               );
@@ -51,11 +60,13 @@ class _ContactsListState extends State<ContactsList> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => const ContactForm(),
-            ),
-          ).then((value) => setState(() {}));
+          Navigator.of(context)
+              .push(
+                MaterialPageRoute(
+                  builder: (context) => const ContactForm(),
+                ),
+              )
+              .then((value) => setState(() {}));
         },
         child: const Icon(
           Icons.add,
@@ -67,11 +78,15 @@ class _ContactsListState extends State<ContactsList> {
 
 class _ContactItem extends StatelessWidget {
   final Contact contact;
-  const _ContactItem(this.contact);
+  final Function onClick;
+
+  const _ContactItem(this.contact, {required this.onClick});
+
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
+        onTap: () => onClick(),
         title: Text(
           contact.name,
           style: const TextStyle(

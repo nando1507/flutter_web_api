@@ -1,10 +1,9 @@
 import 'package:flutter_web_api/screens/dashboard.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_web_api/http/webclient.dart';
 
 void main() {
   runApp(const BytebankApp());
-  findAll().then((transactions) => debugPrint('new transactions $transactions'));
+  //findAll().then((transactions) => debugPrint('new transactions $transactions'));
 }
 
 class BytebankApp extends StatelessWidget {

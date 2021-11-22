@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 
-const String _carregando = 'Loading';
-
 class Progress extends StatelessWidget {
   final String message;
-  Progress({this.message = 'Loading', Key? key}) : super(key: key);
 
+  const Progress({this.message = 'Loading', Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

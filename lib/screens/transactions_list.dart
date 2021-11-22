@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_api/components/centered_message.dart';
 import 'package:flutter_web_api/components/progress.dart';
-import 'package:flutter_web_api/http/webclient.dart';
+import 'package:flutter_web_api/http/webclients/transaction_webclient.dart';
 import 'package:flutter_web_api/models/transaction.dart';
 
 const String _erroDesconhecido = 'Unknown error';
-const String _carregando = 'Loading';
 
 class TransactionsList extends StatelessWidget {
-  const TransactionsList({Key? key}) : super(key: key);
+  TransactionsList({Key? key}) : super(key: key);
+  final TransactionWebClient _webClient = TransactionWebClient();
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +18,13 @@ class TransactionsList extends StatelessWidget {
         title: const Text('Transactions'),
       ),
       body: FutureBuilder<List<Transaction>>(
-        future: findAll(),
+        future: _webClient.findAll(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
               break;
             case ConnectionState.waiting:
-              return Progress();
+              return const Progress();
             case ConnectionState.active:
               break;
             case ConnectionState.done:
@@ -56,14 +56,14 @@ class TransactionsList extends StatelessWidget {
                     itemCount: transactions.length,
                   );
                 } else {
-                  return CenteredMessage(
+                  return const CenteredMessage(
                     'transactions not found',
                     icon: Icons.warning,
                   );
                 }
               }
           }
-          return CenteredMessage(
+          return const CenteredMessage(
             _erroDesconhecido,
             icon: Icons.announcement,
           );

@@ -1,7 +1,6 @@
 import 'package:flutter_web_api/database/dao/contact_dao.dart';
 import 'package:flutter_web_api/models/contact.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_web_api/http/webclient.dart';
 
 const String _appTitle = 'New contact';
 
